@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                 http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean class="com.k.injection.AnotherBean" id="anotherBean"></bean>
+
+    <!--注入方式-->
+    <bean class="com.k.injection.Bean" id="bean">
+        <constructor-arg index="0" name="anotherBean"
+                         type="com.k.injection.AnotherBean"
+                         ref="anotherBean"></constructor-arg>
+        <constructor-arg index="1" name="string" type="java.lang.String"
+                         value="000"></constructor-arg>
+        <property name="anotherBean1" ref="anotherBean"></property>
+        <property name="string1" value="111"></property>
+    </bean>
+
+
+
+    <!--注入方式简便写法-->
+    <bean class="com.k.injection.Bean" id="bean1" c:anotherBean-ref="anotherBean" c:string="333"
+    p:anotherBean1-ref="anotherBean" p:string1="444"></bean>
+
+    <!--注入集合类型-->
+    <bean class="com.k.injection.Bean" id="bean3">
+        <constructor-arg index="0" name="anotherBean"
+                         type="com.k.injection.AnotherBean"
+                         ref="anotherBean"></constructor-arg>
+        <constructor-arg index="1" name="string" type="java.lang.String"
+                         value="000"></constructor-arg>
+        <property name="anotherBean1" ref="anotherBean"></property>
+        <property name="string1" value="111"></property>
+
+        <property name="stringList">
+            <list>
+                <value>111</value>
+                <value>222</value>
+            </list>
+        </property>
+
+        <property name="anotherBeanList">
+            <list>
+                <ref bean="anotherBean"></ref>
+                <ref bean="anotherBean"></ref>
+            </list>
+        </property>
+
+        <property name="stringSet">
+            <set>
+                <value>aaa</value>
+                <value>bbb</value>
+            </set>
+        </property>
+
+        <property name="anotherBeanSet">
+            <set>
+                <ref bean="anotherBean"></ref>
+                <ref bean="anotherBean"></ref>
+            </set>
+        </property>
+
+        <property name="stringMap">
+            <map>
+                <entry key="111" value="aaa"></entry>
+                <entry key="222" value="bbb"></entry>
+            </map>
+        </property>
+
+        <property name="anotherBeanMap">
+            <map>
+                <entry key-ref="anotherBean" value-ref="anotherBean"></entry>
+                <entry key-ref="anotherBean" value-ref="anotherBean"></entry>
+            </map>
+        </property>
+
+        <property name="properties">
+            <props>
+                <prop key="aaaa">111</prop>
+            </props>
+        </property>
+
+    </bean>
+
+</beans>

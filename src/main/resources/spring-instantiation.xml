@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                 http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 通过构造方法实例化Bean  -->
+    <bean id="bean" class="com.k.instantiation.Bean"></bean>
+    <!-- 通过静态方法实例化Bean -->
+    <bean id="bean1" class="com.k.instantiation.BeanFactory" factory-method="createBean" ></bean>
+    <!-- 通过实例方法实例化Bean -->
+    <bean class="com.k.instantiation.BeanFactory1" id="beanFactory1"></bean>
+    <bean class="com.k.instantiation.Bean" id="bean3" factory-bean="beanFactory1" factory-method="createBean"></bean>
+
+    <!-- Bean的别名 -->
+    <bean id="bean05" class="com.k.instantiation.Bean" name="bean5_1,bean5_2"></bean>
+    <alias name="bean05" alias="bean5_3"></alias>
+
+</beans>

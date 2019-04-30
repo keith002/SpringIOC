@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                 http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-lazy-init="true"
+       default-init-method="onInit"
+       default-destroy-method="onDestroy"
+>
+    <!--懒加载-->
+    <!--懒加载只对singleton 作用域的bean 有效-->
+    <!--为所有标签添加懒加载 default-lazy-init
+    优点：尽可能的节省了资源
+    缺点：可能会导致某个操作响应时间增加-->
+    <bean class="com.k.other.Bean" id="bean" lazy-init="true"></bean>
+
+
+    <!-- 创建销毁 -->
+    <!--为所有标签添加初始方法  default-init-method
+    为所有标签添加销毁方法  default-destroy-method-->
+    <bean class="com.k.other.Bean1" id="bean1"
+          init-method="onInit" destroy-method="onDestroy"></bean>
+
+    <!--属性继承-->
+    <bean class="com.k.other.ParentClass" id="parentClass" abstract="true">
+        <property name="str1" value="str1"></property>
+        <property name="str2" value="str2"></property>
+        <property name="str3" value="str3"></property>
+    </bean>
+
+    <bean class="com.k.other.Class1" id="class1" parent="parentClass">
+        <property name="str4" value="str4"></property>
+        <property name="str5" value="str5"></property>
+        <property name="str6" value="str6"></property>
+    </bean>
+
+    <bean class="com.k.other.Class2" id="class2" parent="parentClass">
+        <property name="str7" value="str7"></property>
+        <property name="str8" value="str8"></property>
+        <property name="str9" value="str9"></property>
+    </bean>
+
+
+    <!--没有实体情况-->
+    <bean id="parentClass01" abstract="true">
+        <property name="str1" value="111"></property>
+        <property name="str2" value="222"></property>
+        <property name="str3" value="333"></property>
+    </bean>
+
+    <bean class="com.k.other.Class1" id="class3" parent="parentClass01">
+        <property name="str4" value="444"></property>
+        <property name="str5" value="555"></property>
+        <property name="str6" value="666"></property>
+    </bean>
+
+    <bean class="com.k.other.Class2" id="class4" parent="parentClass01">
+        <property name="str7" value="777"></property>
+        <property name="str8" value="888"></property>
+        <property name="str9" value="999"></property>
+    </bean>
+
+
+
+
+
+</beans>
